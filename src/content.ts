@@ -23,16 +23,30 @@ export const nav = [
 export const donate = { label: 'Donate', href: `${SITE}/support-our-work` }
 
 export const hero = {
-  headline:
-    'Silent Spring Institute is a mission-driven scientific research organization dedicated to uncovering the environmental causes of breast cancer.',
-  body: 'Our independent research is empowering a revolution in environmental health to prevent cancers by reducing people’s exposure to harmful chemicals where they live, work, and play.',
-  image: {
-    src: `${FILES}/homepage_hero_541x577/public/homepage/2016-11-07_Silent_Spring_Institute-2971-Edit_2.jpg?h=890cae8b&itok=Saj32XNq`,
-    alt: 'Silent Spring Institute scientist',
-  },
+  // Trimmed from the live site's opening statement.
+  headline: 'Uncovering the environmental causes of breast cancer.',
+  body: 'Independent research to prevent cancers by reducing exposure to harmful chemicals where people live, work, and play.',
+  // The egg cycles through these. Where a full-size original exists it is tried first,
+  // with the verified smaller rendition as the fallback.
+  images: [
+    {
+      src: `${FILES}/homepage_hero_541x577/public/homepage/2016-11-07_Silent_Spring_Institute-2971-Edit_2.jpg?h=890cae8b&itok=Saj32XNq`,
+      fallback: '',
+      alt: 'Silent Spring Institute scientist',
+    },
+    {
+      src: `${SITE}/sites/default/files/page-basic/2022-02/iStock-928392154_1500.jpg`,
+      fallback: `${FILES}/teaser_home/public/page-basic/2022-02/iStock-928392154_1500.jpg?h=cc556458&itok=tajYCoDt`,
+      alt: 'Family in a kitchen',
+    },
+    {
+      src: `${SITE}/sites/default/files/teaser/2019-04/iStock-936497002_1500.jpg`,
+      fallback: `${FILES}/teaser_home/public/teaser/2019-04/iStock-936497002_1500.jpg?h=f36811e7&itok=9nuuQWEi`,
+      alt: 'Woman shopping',
+    },
+  ],
   primary: { label: 'Support our work', href: `${SITE}/support-our-work` },
   secondary: { label: 'Our Science', href: `${SITE}/our-science` },
-  founded: 'Newton, Massachusetts. Founded 1994.',
 }
 
 export const belief = {

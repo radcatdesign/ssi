@@ -325,78 +325,106 @@ body {
 ---------------------------------------------------------------- */
 .hero {
   position: relative;
-  padding-top: calc(var(--header-h) + clamp(2.5rem, 6vw, 5.5rem));
-  padding-bottom: clamp(4rem, 8vw, 7.5rem);
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding-top: calc(var(--header-h) + 1.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
   overflow: hidden;
 }
 .hero__grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 1.5rem;
-  align-items: start;
+  align-items: center;
+}
+.hero__copy {
+  position: relative;
+  z-index: 2;
+  grid-column: 1 / span 8;
+  grid-row: 1;
 }
 .hero__title {
-  grid-column: 1 / span 8;
   font-family: var(--display);
   font-weight: 600;
-  font-size: clamp(2.15rem, 4.5vw, 4.4rem);
-  line-height: 1.03;
-  letter-spacing: -0.04em;
-}
-.hero__art {
-  position: relative;
-  grid-column: 9 / span 4;
-  grid-row: 1 / span 2;
-  margin-top: 0.5rem;
-}
-/* The photo sits in an egg; a robin's-egg shell leans behind it. */
-.hero__egg {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  background: var(--mist);
-}
-.hero__egg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 20%;
-}
-.hero__shell {
-  position: absolute;
-  inset: -5% -9% -9% -9%;
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  background: var(--egg);
-  transform: rotate(-14deg);
+  font-size: clamp(2.75rem, min(8.2vw, 13.5vh), 8.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  /* Breaks as: Uncovering the / environmental / causes of / breast cancer. */
+  max-width: 6.95em;
 }
 .hero__body {
-  grid-column: 1 / span 6;
-  margin-top: clamp(2rem, 4vw, 3.5rem);
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+.hero__body .lead {
+  max-width: 30ch;
 }
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 2rem;
+  margin-top: 1.75rem;
 }
-.hero__founded {
-  margin-top: 2rem;
-  font-style: italic;
-  font-size: 1rem;
-  color: var(--ink-soft);
+.hero__art {
+  position: relative;
+  z-index: 1;
+  grid-column: 8 / span 5;
+  grid-row: 1;
+  justify-self: end;
+  width: min(100%, 54vh);
+}
+/* The photos sit in an egg; a robin's-egg shell leans behind it.
+   On scroll the shell grows until it becomes the next section's background. */
+.hero__egg {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: var(--mist);
+}
+.hero__egg img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  will-change: transform, clip-path, opacity;
+}
+.hero__egg img + img {
+  opacity: 0;
+}
+.hero__shell-wrap {
+  position: absolute;
+  inset: -5% -9% -9% -9%;
+  transform: rotate(-14deg);
+}
+.hero__shell {
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: var(--egg);
+  will-change: transform;
 }
 
 @media (max-width: 860px) {
-  .hero__title,
-  .hero__body {
-    grid-column: 1 / -1;
+  .hero {
+    display: block;
+    min-height: 0;
+    padding-top: calc(var(--header-h) + 2rem);
+    padding-bottom: 4.5rem;
   }
+  .hero__copy,
   .hero__art {
     grid-column: 1 / -1;
     grid-row: auto;
-    width: min(70%, 19rem);
-    margin: 3rem auto 0.5rem;
+  }
+  .hero__art {
+    justify-self: center;
+    width: min(66%, 17rem);
+    margin-top: 3.5rem;
   }
 }
 
